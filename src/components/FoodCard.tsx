@@ -1,23 +1,31 @@
 import { useState } from "react";
-import { Heart, Clock, Star, ShoppingBag, Flame } from "lucide-react";
+import { Heart, Clock, Star, ShoppingBag, Flame, Share2, MessageCircle } from "lucide-react";
 import type { FoodPost } from "@/data/mockData";
 
 interface FoodCardProps {
   post: FoodPost;
   onSave: (id: string) => void;
   isSaved: boolean;
+  onOrder: (post: FoodPost) => void;
 }
 
-const FoodCard = ({ post, onSave, isSaved }: FoodCardProps) => {
+const FoodCard = ({ post, onSave, isSaved, onOrder }: FoodCardProps) => {
   const [imgLoaded, setImgLoaded] = useState(false);
+  const [heartBounce, setHeartBounce] = useState(false);
+
+  const handleLike = () => {
+    setHeartBounce(true);
+    onSave(post.id);
+    setTimeout(() => setHeartBounce(false), 600);
+  };
 
   return (
     <div className="relative w-full h-full snap-start snap-always flex-shrink-0">
       {/* Food Image */}
       <div className="absolute inset-0">
         {!imgLoaded && (
-          <div className="absolute inset-0 bg-muted animate-shimmer" 
-            style={{ backgroundImage: "linear-gradient(90deg, transparent, hsl(var(--primary) / 0.05), transparent)", backgroundSize: "200% 100%" }} 
+          <div className="absolute inset-0 bg-muted animate-shimmer"
+            style={{ backgroundImage: "linear-gradient(90deg, transparent, hsl(var(--primary) / 0.05), transparent)", backgroundSize: "200% 100%" }}
           />
         )}
         <img
@@ -27,30 +35,53 @@ const FoodCard = ({ post, onSave, isSaved }: FoodCardProps) => {
           onLoad={() => setImgLoaded(true)}
           loading="lazy"
         />
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/20 to-transparent" />
       </div>
 
-      {/* Top bar */}
-      <div className="absolute top-0 left-0 right-0 p-4 flex items-start justify-between z-10">
-        {post.isLimited && (
+      {/* Limited badge - top left */}
+      {post.isLimited && (
+        <div className="absolute top-20 left-4 z-10">
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-destructive/90 backdrop-blur-sm">
             <Flame className="w-3.5 h-3.5 text-destructive-foreground" />
             <span className="text-xs font-semibold text-destructive-foreground">
               Nur noch {post.limitedCount}!
             </span>
           </div>
-        )}
-        <div className="ml-auto">
-          <button
-            onClick={() => onSave(post.id)}
-            className="w-10 h-10 rounded-full glass flex items-center justify-center transition-all active:scale-90"
-          >
-            <Heart
-              className={`w-5 h-5 transition-all ${isSaved ? "fill-destructive text-destructive scale-110" : "text-primary-foreground"}`}
-            />
-          </button>
         </div>
+      )}
+
+      {/* TikTok-style right side action buttons */}
+      <div className="absolute right-3 bottom-52 z-10 flex flex-col items-center gap-5">
+        {/* Like / Save */}
+        <button
+          onClick={handleLike}
+          className="flex flex-col items-center gap-1"
+        >
+          <div className={`w-12 h-12 rounded-full glass flex items-center justify-center transition-all active:scale-90 ${heartBounce ? "animate-heart-bounce" : ""}`}>
+            <Heart
+              className={`w-6 h-6 transition-all ${isSaved ? "fill-destructive text-destructive scale-110" : "text-primary-foreground"}`}
+            />
+          </div>
+          <span className="text-[10px] font-semibold text-primary-foreground/80">
+            {isSaved ? "Gespeichert" : "Speichern"}
+          </span>
+        </button>
+
+        {/* Comment (decorative) */}
+        <button className="flex flex-col items-center gap-1">
+          <div className="w-12 h-12 rounded-full glass flex items-center justify-center transition-all active:scale-90">
+            <MessageCircle className="w-6 h-6 text-primary-foreground" />
+          </div>
+          <span className="text-[10px] font-semibold text-primary-foreground/80">Kommentare</span>
+        </button>
+
+        {/* Share (decorative) */}
+        <button className="flex flex-col items-center gap-1">
+          <div className="w-12 h-12 rounded-full glass flex items-center justify-center transition-all active:scale-90">
+            <Share2 className="w-6 h-6 text-primary-foreground" />
+          </div>
+          <span className="text-[10px] font-semibold text-primary-foreground/80">Teilen</span>
+        </button>
       </div>
 
       {/* Bottom content */}
@@ -99,7 +130,10 @@ const FoodCard = ({ post, onSave, isSaved }: FoodCardProps) => {
           <span className="text-3xl font-black text-primary-foreground">
             {post.price.toFixed(2).replace(".", ",")} €
           </span>
-          <button className="flex-1 py-3.5 rounded-2xl gradient-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 transition-all hover:shadow-elevated active:scale-[0.97]">
+          <button
+            onClick={() => onOrder(post)}
+            className="flex-1 py-3.5 rounded-2xl gradient-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 transition-all hover:shadow-elevated active:scale-[0.97]"
+          >
             <ShoppingBag className="w-5 h-5" />
             Jetzt bestellen
           </button>

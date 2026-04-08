@@ -6,14 +6,13 @@ interface FoodFeedProps {
   posts: FoodPost[];
   savedIds: Set<string>;
   onSave: (id: string) => void;
+  onOrder: (post: FoodPost) => void;
 }
 
-const FoodFeed = ({ posts, savedIds, onSave }: FoodFeedProps) => {
+const FoodFeed = ({ posts, savedIds, onSave, onOrder }: FoodFeedProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleSnapEnd = useCallback(() => {
-    // Snap behavior handled by CSS
-  }, []);
+  const handleSnapEnd = useCallback(() => {}, []);
 
   return (
     <div
@@ -27,6 +26,7 @@ const FoodFeed = ({ posts, savedIds, onSave }: FoodFeedProps) => {
             post={post}
             onSave={onSave}
             isSaved={savedIds.has(post.id)}
+            onOrder={onOrder}
           />
         </div>
       ))}

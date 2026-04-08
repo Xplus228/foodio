@@ -4,6 +4,7 @@ import FoodFeed from "@/components/FoodFeed";
 import TopBar from "@/components/TopBar";
 import HamburgerMenu from "@/components/HamburgerMenu";
 import SurpriseOverlay from "@/components/SurpriseOverlay";
+import OrderSheet from "@/components/OrderSheet";
 import { foodPosts } from "@/data/mockData";
 import type { FoodPost } from "@/data/mockData";
 
@@ -15,6 +16,7 @@ const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
   const [surprisePost, setSurprisePost] = useState<FoodPost | null>(null);
+  const [orderPost, setOrderPost] = useState<FoodPost | null>(null);
 
   const handlePLZComplete = useCallback((detectedCity: string) => {
     setCity(detectedCity);
@@ -44,7 +46,7 @@ const Index = () => {
   return (
     <div className="relative w-full h-screen overflow-hidden bg-foreground">
       <TopBar city={city} onMenuOpen={() => setMenuOpen(true)} />
-      <FoodFeed posts={foodPosts} savedIds={savedIds} onSave={handleSave} />
+      <FoodFeed posts={foodPosts} savedIds={savedIds} onSave={handleSave} onOrder={setOrderPost} />
       <HamburgerMenu
         isOpen={menuOpen}
         onClose={() => setMenuOpen(false)}
@@ -54,6 +56,9 @@ const Index = () => {
       />
       {surprisePost && (
         <SurpriseOverlay post={surprisePost} onClose={() => setSurprisePost(null)} />
+      )}
+      {orderPost && (
+        <OrderSheet post={orderPost} onClose={() => setOrderPost(null)} />
       )}
     </div>
   );
