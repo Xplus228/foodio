@@ -20,6 +20,9 @@ export interface FoodPost {
   limitedCount?: number;
   limitedEndsAt?: number;
   tags: string[];
+  visitOnly?: boolean;
+  distance?: string;
+  commentCount?: number;
 }
 
 export const foodPosts: FoodPost[] = [
@@ -33,6 +36,8 @@ export const foodPosts: FoodPost[] = [
     rating: 4.8,
     deliveryTime: "25-35 Min",
     tags: ["Burger", "Amerikanisch"],
+    distance: "1,2 km",
+    commentCount: 34,
   },
   {
     id: "2",
@@ -46,6 +51,8 @@ export const foodPosts: FoodPost[] = [
     isLimited: true,
     limitedCount: 12,
     tags: ["Pizza", "Italienisch"],
+    distance: "500m",
+    commentCount: 58,
   },
   {
     id: "3",
@@ -57,6 +64,8 @@ export const foodPosts: FoodPost[] = [
     rating: 4.7,
     deliveryTime: "15-25 Min",
     tags: ["Bowl", "Gesund"],
+    distance: "2,3 km",
+    commentCount: 21,
   },
   {
     id: "4",
@@ -70,6 +79,9 @@ export const foodPosts: FoodPost[] = [
     isLimited: true,
     limitedCount: 5,
     tags: ["Dessert", "Süß"],
+    visitOnly: true,
+    distance: "350m",
+    commentCount: 12,
   },
   {
     id: "5",
@@ -81,6 +93,8 @@ export const foodPosts: FoodPost[] = [
     rating: 4.9,
     deliveryTime: "30-40 Min",
     tags: ["Sushi", "Japanisch"],
+    distance: "3,1 km",
+    commentCount: 45,
   },
   {
     id: "6",
@@ -92,6 +106,9 @@ export const foodPosts: FoodPost[] = [
     rating: 4.5,
     deliveryTime: "25-35 Min",
     tags: ["Chicken", "Koreanisch"],
+    visitOnly: true,
+    distance: "800m",
+    commentCount: 19,
   },
   {
     id: "7",
@@ -103,6 +120,8 @@ export const foodPosts: FoodPost[] = [
     rating: 4.4,
     deliveryTime: "10-20 Min",
     tags: ["Bowl", "Vegan"],
+    distance: "1,5 km",
+    commentCount: 28,
   },
   {
     id: "8",
@@ -114,6 +133,8 @@ export const foodPosts: FoodPost[] = [
     rating: 4.8,
     deliveryTime: "20-30 Min",
     tags: ["Ramen", "Japanisch"],
+    distance: "2,0 km",
+    commentCount: 37,
   },
 ];
 
