@@ -7,10 +7,11 @@ interface HamburgerMenuProps {
   onClose: () => void;
   savedItems: FoodPost[];
   onSurprise: () => void;
+  onProfile: () => void;
   city: string;
 }
 
-const HamburgerMenu = ({ isOpen, onClose, savedItems, onSurprise, city }: HamburgerMenuProps) => {
+const HamburgerMenu = ({ isOpen, onClose, savedItems, onSurprise, onProfile, city }: HamburgerMenuProps) => {
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   if (!isOpen) return null;
@@ -21,33 +22,21 @@ const HamburgerMenu = ({ isOpen, onClose, savedItems, onSurprise, city }: Hambur
     { icon: Shuffle, label: "Überrasch mich!", id: "surprise", action: onSurprise },
     { icon: Heart, label: `Gespeichert (${savedItems.length})`, id: "saved" },
     { icon: Clock, label: "Limitierte Angebote", id: "limited" },
-    { icon: User, label: "Mein Profil", id: "profile" },
+    { icon: User, label: "Mein Profil", id: "profile", action: onProfile },
     { icon: LogIn, label: "Anmelden", id: "login" },
   ];
 
   return (
     <>
-      {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-foreground/40 backdrop-blur-sm z-40 transition-opacity"
-        onClick={onClose}
-      />
-
-      {/* Menu panel */}
+      <div className="fixed inset-0 bg-foreground/40 backdrop-blur-sm z-40 transition-opacity" onClick={onClose} />
       <div className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-background z-50 animate-slide-in-right shadow-elevated">
         <div className="flex flex-col h-full">
-          {/* Header */}
           <div className="flex items-center justify-between p-5 border-b border-border">
             <h2 className="text-lg font-bold text-foreground">Menü</h2>
-            <button
-              onClick={onClose}
-              className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center transition-all hover:bg-secondary/80 active:scale-90"
-            >
+            <button onClick={onClose} className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center transition-all hover:bg-secondary/80 active:scale-90">
               <X className="w-5 h-5 text-secondary-foreground" />
             </button>
           </div>
-
-          {/* Menu items */}
           <div className="flex-1 overflow-y-auto p-3">
             {menuItems.map((item, i) => (
               <button
@@ -71,8 +60,6 @@ const HamburgerMenu = ({ isOpen, onClose, savedItems, onSurprise, city }: Hambur
               </button>
             ))}
           </div>
-
-          {/* Saved items preview */}
           {savedItems.length > 0 && (
             <div className="p-4 border-t border-border">
               <p className="text-xs text-muted-foreground mb-2 font-medium">Gespeicherte Gerichte</p>

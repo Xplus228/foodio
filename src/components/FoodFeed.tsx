@@ -5,13 +5,15 @@ import type { FoodPost } from "@/data/mockData";
 interface FoodFeedProps {
   posts: FoodPost[];
   savedIds: Set<string>;
+  likedIds: Set<string>;
   onSave: (id: string) => void;
+  onLike: (id: string) => void;
   onOrder: (post: FoodPost) => void;
+  onComments: (post: FoodPost) => void;
 }
 
-const FoodFeed = ({ posts, savedIds, onSave, onOrder }: FoodFeedProps) => {
+const FoodFeed = ({ posts, savedIds, likedIds, onSave, onLike, onOrder, onComments }: FoodFeedProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-
   const handleSnapEnd = useCallback(() => {}, []);
 
   return (
@@ -26,7 +28,10 @@ const FoodFeed = ({ posts, savedIds, onSave, onOrder }: FoodFeedProps) => {
             post={post}
             onSave={onSave}
             isSaved={savedIds.has(post.id)}
+            isLiked={likedIds.has(post.id)}
+            onLike={onLike}
             onOrder={onOrder}
+            onComments={onComments}
           />
         </div>
       ))}
