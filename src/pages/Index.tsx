@@ -1,16 +1,62 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useCallback } from "react";
+import PLZScreen from "@/components/PLZScreen";
+import FoodFeed from "@/components/FoodFeed";
+import TopBar from "@/components/TopBar";
+import HamburgerMenu from "@/components/HamburgerMenu";
+import SurpriseOverlay from "@/components/SurpriseOverlay";
+import { foodPosts } from "@/data/mockData";
+import type { FoodPost } from "@/data/mockData";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+type AppState = "plz" | "feed";
+
+const Index = () => {
+  const [appState, setAppState] = useState<AppState>("plz");
+  const [city, setCity] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
+  const [surprisePost, setSurprisePost] = useState<FoodPost | null>(null);
+
+  const handlePLZComplete = useCallback((detectedCity: string) => {
+    setCity(detectedCity);
+    setAppState("feed");
+  }, []);
+
+  const handleSave = useCallback((id: string) => {
+    setSavedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }, []);
+
+  const handleSurprise = useCallback(() => {
+    const randomIndex = Math.floor(Math.random() * foodPosts.length);
+    setSurprisePost(foodPosts[randomIndex]);
+  }, []);
+
+  const savedItems = foodPosts.filter((p) => savedIds.has(p.id));
+
+  if (appState === "plz") {
+    return <PLZScreen onComplete={handlePLZComplete} />;
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="relative w-full h-screen overflow-hidden bg-foreground">
+      <TopBar city={city} onMenuOpen={() => setMenuOpen(true)} />
+      <FoodFeed posts={foodPosts} savedIds={savedIds} onSave={handleSave} />
+      <HamburgerMenu
+        isOpen={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        savedItems={savedItems}
+        onSurprise={handleSurprise}
+        city={city}
+      />
+      {surprisePost && (
+        <SurpriseOverlay post={surprisePost} onClose={() => setSurprisePost(null)} />
+      )}
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
