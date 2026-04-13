@@ -6,6 +6,12 @@ import foodSushi from "@/assets/food-sushi.jpg";
 import foodChicken from "@/assets/food-chicken.jpg";
 import foodAcai from "@/assets/food-acai.jpg";
 import foodRamen from "@/assets/food-ramen.jpg";
+import foodDoener from "@/assets/food-doener.jpg";
+import foodFish from "@/assets/food-fish.jpg";
+import foodPasta from "@/assets/food-pasta.jpg";
+import foodTacos from "@/assets/food-tacos.jpg";
+import foodCurry from "@/assets/food-curry.jpg";
+import foodSteak from "@/assets/food-steak.jpg";
 
 export interface FoodPost {
   id: string;
@@ -135,6 +141,88 @@ export const foodPosts: FoodPost[] = [
     tags: ["Ramen", "Japanisch"],
     distance: "2,0 km",
     commentCount: 37,
+  },
+  {
+    id: "9",
+    image: foodDoener,
+    restaurant: "Istanbul Grill",
+    dish: "Döner Kebab Spezial",
+    description: "Saftiges Dönerfleisch im frischen Fladenbrot mit Salat & Knoblauchsauce",
+    price: 8.50,
+    rating: 4.6,
+    deliveryTime: "15-25 Min",
+    tags: ["Döner", "Türkisch"],
+    distance: "400m",
+    commentCount: 67,
+  },
+  {
+    id: "10",
+    image: foodFish,
+    restaurant: "Hafenküche",
+    dish: "Fish & Chips",
+    description: "Knuspriger Kabeljau mit goldenen Pommes & hausgemachter Remoulade",
+    price: 13.90,
+    rating: 4.5,
+    deliveryTime: "20-30 Min",
+    tags: ["Fisch", "Britisch"],
+    visitOnly: true,
+    distance: "1,8 km",
+    commentCount: 23,
+  },
+  {
+    id: "11",
+    image: foodPasta,
+    restaurant: "Trattoria Roma",
+    dish: "Pasta Carbonara",
+    description: "Cremige Carbonara mit Guanciale, Pecorino & frischem Ei",
+    price: 14.90,
+    rating: 4.8,
+    deliveryTime: "20-30 Min",
+    tags: ["Pasta", "Italienisch"],
+    distance: "900m",
+    commentCount: 41,
+  },
+  {
+    id: "12",
+    image: foodTacos,
+    restaurant: "El Mexicano",
+    dish: "Street Tacos Mix",
+    description: "3 handgemachte Tacos mit Carnitas, Salsa Verde & frischem Koriander",
+    price: 11.90,
+    rating: 4.7,
+    deliveryTime: "15-25 Min",
+    isLimited: true,
+    limitedCount: 8,
+    tags: ["Tacos", "Mexikanisch"],
+    distance: "1,4 km",
+    commentCount: 35,
+  },
+  {
+    id: "13",
+    image: foodCurry,
+    restaurant: "Thai Garden",
+    dish: "Green Thai Curry",
+    description: "Authentisches grünes Curry mit Kokosmilch, Thai-Basilikum & Jasminreis",
+    price: 13.50,
+    rating: 4.6,
+    deliveryTime: "25-35 Min",
+    tags: ["Curry", "Thailändisch"],
+    distance: "2,5 km",
+    commentCount: 29,
+  },
+  {
+    id: "14",
+    image: foodSteak,
+    restaurant: "The Steakhouse",
+    dish: "Ribeye Steak Medium",
+    description: "300g Dry-Aged Ribeye mit Kräuterbutter, Grillgemüse & Rosmarinkartoffeln",
+    price: 32.90,
+    rating: 4.9,
+    deliveryTime: "30-45 Min",
+    tags: ["Steak", "Premium"],
+    visitOnly: true,
+    distance: "600m",
+    commentCount: 52,
   },
 ];
 
