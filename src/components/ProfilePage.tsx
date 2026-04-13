@@ -272,12 +272,15 @@ const ProfilePage = ({ isOpen, onClose, savedItems, likedIds, allPosts, comments
               <p className="col-span-3 text-center text-muted-foreground py-12 text-sm">Noch keine gespeicherten Gerichte</p>
             )}
             {savedItems.map((item) => (
-              <div key={item.id} className="aspect-square rounded-xl overflow-hidden relative animate-scale-in">
-                <img src={item.image} alt={item.dish} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-foreground/30 flex items-end p-2">
+              <button key={item.id} onClick={() => onOpenPost?.(item)} className="aspect-square rounded-xl overflow-hidden relative animate-scale-in group transition-transform hover:scale-[1.03] active:scale-95">
+                <img src={item.image} alt={item.dish} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-foreground/30 group-hover:bg-foreground/50 transition-colors flex items-end p-2">
                   <p className="text-xs font-semibold text-primary-foreground line-clamp-2">{item.dish}</p>
                 </div>
-              </div>
+                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-xs bg-primary/80 text-primary-foreground px-2 py-0.5 rounded-full">Öffnen</span>
+                </div>
+              </button>
             ))}
           </div>
         )}
@@ -288,13 +291,16 @@ const ProfilePage = ({ isOpen, onClose, savedItems, likedIds, allPosts, comments
               <p className="col-span-3 text-center text-muted-foreground py-12 text-sm">Noch keine geliketen Gerichte</p>
             )}
             {likedItems.map((item) => (
-              <div key={item.id} className="aspect-square rounded-xl overflow-hidden relative animate-scale-in">
-                <img src={item.image} alt={item.dish} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-foreground/30 flex items-end p-2">
+              <button key={item.id} onClick={() => onOpenPost?.(item)} className="aspect-square rounded-xl overflow-hidden relative animate-scale-in group transition-transform hover:scale-[1.03] active:scale-95">
+                <img src={item.image} alt={item.dish} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-foreground/30 group-hover:bg-foreground/50 transition-colors flex items-end p-2">
                   <Heart className="w-3 h-3 text-destructive fill-destructive absolute top-2 right-2" />
                   <p className="text-xs font-semibold text-primary-foreground line-clamp-2">{item.dish}</p>
                 </div>
-              </div>
+                <div className="absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-xs bg-primary/80 text-primary-foreground px-2 py-0.5 rounded-full">Öffnen</span>
+                </div>
+              </button>
             ))}
           </div>
         )}
