@@ -8,19 +8,17 @@ interface FoodFeedProps {
   likedIds: Set<string>;
   onSave: (id: string) => void;
   onLike: (id: string) => void;
-  onOrder: (post: FoodPost) => void;
+  onAddToCart: (post: FoodPost) => void;
   onComments: (post: FoodPost) => void;
 }
 
-const FoodFeed = ({ posts, savedIds, likedIds, onSave, onLike, onOrder, onComments }: FoodFeedProps) => {
+const FoodFeed = ({ posts, savedIds, likedIds, onSave, onLike, onAddToCart, onComments }: FoodFeedProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const handleSnapEnd = useCallback(() => {}, []);
 
   return (
     <div
       ref={containerRef}
       className="h-screen w-full overflow-y-scroll snap-y snap-mandatory hide-scrollbar"
-      onScroll={handleSnapEnd}
     >
       {posts.map((post) => (
         <div key={post.id} className="h-screen w-full">
@@ -30,7 +28,7 @@ const FoodFeed = ({ posts, savedIds, likedIds, onSave, onLike, onOrder, onCommen
             isSaved={savedIds.has(post.id)}
             isLiked={likedIds.has(post.id)}
             onLike={onLike}
-            onOrder={onOrder}
+            onAddToCart={onAddToCart}
             onComments={onComments}
           />
         </div>

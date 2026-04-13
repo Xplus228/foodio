@@ -1,12 +1,15 @@
-import { Menu, MapPin } from "lucide-react";
+import { Menu, User, ShoppingCart } from "lucide-react";
+import { MapPin } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 interface TopBarProps {
   city: string;
   onMenuOpen: () => void;
+  onProfileOpen: () => void;
+  cartCount: number;
 }
 
-const TopBar = ({ city, onMenuOpen }: TopBarProps) => {
+const TopBar = ({ city, onMenuOpen, onProfileOpen, cartCount }: TopBarProps) => {
   return (
     <div className="fixed top-0 left-0 right-0 z-30 p-4">
       <div className="flex items-center justify-between">
@@ -22,13 +25,28 @@ const TopBar = ({ city, onMenuOpen }: TopBarProps) => {
           </div>
         </div>
 
-        {/* Hamburger */}
-        <button
-          onClick={onMenuOpen}
-          className="w-10 h-10 rounded-full glass flex items-center justify-center transition-all hover:bg-primary-foreground/20 active:scale-90"
-        >
-          <Menu className="w-5 h-5 text-primary-foreground" />
-        </button>
+        <div className="flex items-center gap-2">
+          {/* Profile */}
+          <button
+            onClick={onProfileOpen}
+            className="relative w-10 h-10 rounded-full glass flex items-center justify-center transition-all hover:bg-primary-foreground/20 active:scale-90"
+          >
+            <User className="w-5 h-5 text-primary-foreground" />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </button>
+
+          {/* Hamburger */}
+          <button
+            onClick={onMenuOpen}
+            className="w-10 h-10 rounded-full glass flex items-center justify-center transition-all hover:bg-primary-foreground/20 active:scale-90"
+          >
+            <Menu className="w-5 h-5 text-primary-foreground" />
+          </button>
+        </div>
       </div>
     </div>
   );

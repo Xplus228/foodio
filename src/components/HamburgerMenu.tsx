@@ -1,28 +1,25 @@
 import { useState } from "react";
-import { X, TrendingUp, Award, Shuffle, Heart, Clock, User, LogIn, ChevronRight } from "lucide-react";
+import { X, TrendingUp, Award, Shuffle, Clock, LogIn, ChevronRight } from "lucide-react";
 import type { FoodPost } from "@/data/mockData";
 
 interface HamburgerMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  savedItems: FoodPost[];
   onSurprise: () => void;
-  onProfile: () => void;
+  onTrending: () => void;
+  onTopRestaurants: () => void;
+  onLimitedOffers: () => void;
   city: string;
 }
 
-const HamburgerMenu = ({ isOpen, onClose, savedItems, onSurprise, onProfile, city }: HamburgerMenuProps) => {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-
+const HamburgerMenu = ({ isOpen, onClose, onSurprise, onTrending, onTopRestaurants, onLimitedOffers, city }: HamburgerMenuProps) => {
   if (!isOpen) return null;
 
   const menuItems = [
-    { icon: TrendingUp, label: "Trending in " + city, id: "trending" },
-    { icon: Award, label: "Top Restaurants der Woche", id: "top" },
+    { icon: TrendingUp, label: "Trending in " + city, id: "trending", action: onTrending },
+    { icon: Award, label: "Top Restaurants der Woche", id: "top", action: onTopRestaurants },
     { icon: Shuffle, label: "Überrasch mich!", id: "surprise", action: onSurprise },
-    { icon: Heart, label: `Gespeichert (${savedItems.length})`, id: "saved" },
-    { icon: Clock, label: "Limitierte Angebote", id: "limited" },
-    { icon: User, label: "Mein Profil", id: "profile", action: onProfile },
+    { icon: Clock, label: "Limitierte Angebote", id: "limited", action: onLimitedOffers },
     { icon: LogIn, label: "Anmelden", id: "login" },
   ];
 
@@ -45,8 +42,6 @@ const HamburgerMenu = ({ isOpen, onClose, savedItems, onSurprise, onProfile, cit
                   if (item.action) {
                     item.action();
                     onClose();
-                  } else {
-                    setActiveSection(activeSection === item.id ? null : item.id);
                   }
                 }}
                 className="w-full flex items-center gap-4 px-4 py-4 rounded-xl text-foreground hover:bg-secondary/60 transition-all active:scale-[0.98] animate-fade-in"
@@ -60,23 +55,6 @@ const HamburgerMenu = ({ isOpen, onClose, savedItems, onSurprise, onProfile, cit
               </button>
             ))}
           </div>
-          {savedItems.length > 0 && (
-            <div className="p-4 border-t border-border">
-              <p className="text-xs text-muted-foreground mb-2 font-medium">Gespeicherte Gerichte</p>
-              <div className="flex gap-2 overflow-x-auto hide-scrollbar">
-                {savedItems.slice(0, 4).map((item) => (
-                  <div key={item.id} className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden">
-                    <img src={item.image} alt={item.dish} className="w-full h-full object-cover" />
-                  </div>
-                ))}
-                {savedItems.length > 4 && (
-                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-secondary flex items-center justify-center">
-                    <span className="text-xs font-bold text-secondary-foreground">+{savedItems.length - 4}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </>
