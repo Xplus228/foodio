@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# Foodio
 
-TODO: Document your project here
+Copyright (c) 2026 Xplus. All rights reserved. No part of this project may be copied, distributed, or modified without permission.
