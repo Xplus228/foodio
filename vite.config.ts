@@ -5,6 +5,9 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // Добавляем эту строку. Замени Foodio на точное название твоего репозитория
+  base: mode === "production" ? "/foodioo/" : "/", 
+  
   server: {
     host: "::",
     port: 8080,
