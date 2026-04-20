@@ -14,13 +14,14 @@ const foodTacos = "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?
 const foodCurry = "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&q=80";
 const foodSteak = "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80";
 
-import videoBurger from "@/assets/video-burger.mp4.asset.json";
-import videoPizza from "@/assets/video-pizza.mp4.asset.json";
-import videoRamen from "@/assets/video-ramen.mp4.asset.json";
-import videoSushi from "@/assets/video-sushi.mp4.asset.json";
-import videoDoener from "@/assets/video-doener.mp4.asset.json";
-import videoDessert from "@/assets/video-dessert.mp4.asset.json";
-import videoSteak from "@/assets/video-steak.mp4.asset.json";
+// Real license-free food videos from Pexels (vertical TikTok format preferred)
+const videoBurger = "https://videos.pexels.com/video-files/6092268/6092268-hd_1080_1920_30fps.mp4";
+const videoPizza = "https://videos.pexels.com/video-files/8546305/8546305-uhd_2560_1440_25fps.mp4";
+const videoRamen = "https://videos.pexels.com/video-files/31387604/13393487_1080_1920_30fps.mp4";
+const videoSushi = "https://videos.pexels.com/video-files/7438347/7438347-uhd_1440_2496_30fps.mp4";
+const videoDoener = "https://videos.pexels.com/video-files/36122692/15318715_1440_2560_60fps.mp4";
+const videoDessert = "https://videos.pexels.com/video-files/30221670/12958108_1080_1920_60fps.mp4";
+const videoSteak = "https://videos.pexels.com/video-files/3209830/3209830-uhd_2560_1440_25fps.mp4";
 
 export interface FoodPost {
   id: string;
