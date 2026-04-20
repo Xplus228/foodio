@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Heart, Clock, Star, ShoppingCart, Flame, Share2, MessageCircle, MapPin, Navigation } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Heart, Clock, Star, ShoppingCart, Flame, Share2, MessageCircle, MapPin, Navigation, Volume2, VolumeX } from "lucide-react";
 import type { FoodPost } from "@/data/mockData";
 
 interface FoodCardProps {
