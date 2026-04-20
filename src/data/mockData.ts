@@ -46,7 +46,7 @@ export const foodPosts: FoodPost[] = [
   {
     id: "1",
     image: foodBurger,
-    video: videoBurger.url,
+    video: videoBurger,
     restaurant: "Burger Meister",
     dish: "Smash Burger Deluxe",
     description: "Doppeltes Smash-Patty mit Cheddar, Bacon & Hausspezial-Sauce",
@@ -60,7 +60,7 @@ export const foodPosts: FoodPost[] = [
   {
     id: "2",
     image: foodPizza,
-    video: videoPizza.url,
+    video: videoPizza,
     restaurant: "Napoli Express",
     dish: "Pizza Margherita DOP",
     description: "Original neapolitanisch mit San Marzano Tomaten & Büffelmozzarella",
@@ -89,7 +89,7 @@ export const foodPosts: FoodPost[] = [
   {
     id: "4",
     image: foodDessert,
-    video: videoDessert.url,
+    video: videoDessert,
     restaurant: "Sweet Dreams",
     dish: "Schokoladen Lava Cake",
     description: "Warmer Schokoladenkuchen mit flüssigem Kern & Vanilleeis",
@@ -106,7 +106,7 @@ export const foodPosts: FoodPost[] = [
   {
     id: "5",
     image: foodSushi,
-    video: videoSushi.url,
+    video: videoSushi,
     restaurant: "Sakura Sushi",
     dish: "Premium Sushi Platte",
     description: "12 Stück handgerolltes Sushi mit Lachs, Thunfisch & Garnelen",
@@ -147,7 +147,7 @@ export const foodPosts: FoodPost[] = [
   {
     id: "8",
     image: foodRamen,
-    video: videoRamen.url,
+    video: videoRamen,
     restaurant: "Ramen House",
     dish: "Tonkotsu Ramen",
     description: "Cremige Schweineknochen-Brühe mit Chashu, Ei & Frühlingszwiebeln",
@@ -161,7 +161,7 @@ export const foodPosts: FoodPost[] = [
   {
     id: "9",
     image: foodDoener,
-    video: videoDoener.url,
+    video: videoDoener,
     restaurant: "Istanbul Grill",
     dish: "Döner Kebab Spezial",
     description: "Saftiges Dönerfleisch im frischen Fladenbrot mit Salat & Knoblauchsauce",
@@ -230,7 +230,7 @@ export const foodPosts: FoodPost[] = [
   {
     id: "14",
     image: foodSteak,
-    video: videoSteak.url,
+    video: videoSteak,
     restaurant: "The Steakhouse",
     dish: "Ribeye Steak Medium",
     description: "300g Dry-Aged Ribeye mit Kräuterbutter, Grillgemüse & Rosmarinkartoffeln",
