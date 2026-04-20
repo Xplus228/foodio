@@ -13,12 +13,24 @@ interface FoodCardProps {
   isVisible?: boolean;
 }
 
-const FoodCard = ({ post, onSave, isSaved, isLiked, onLike, onAddToCart, onComments }: FoodCardProps) => {
+const FoodCard = ({ post, onSave, isSaved, isLiked, onLike, onAddToCart, onComments, isVisible }: FoodCardProps) => {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [heartBounce, setHeartBounce] = useState(false);
   const [shareBounce, setShareBounce] = useState(false);
   const [shareToast, setShareToast] = useState(false);
   const [cartToast, setCartToast] = useState(false);
+  const [muted, setMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!videoRef.current || !post.video) return;
+    if (isVisible) {
+      videoRef.current.play().catch(() => {});
+    } else {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  }, [isVisible, post.video]);
 
   const handleLike = () => {
     setHeartBounce(true);
