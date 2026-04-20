@@ -13,9 +13,18 @@ import foodTacos from "@/assets/food-tacos.jpg";
 import foodCurry from "@/assets/food-curry.jpg";
 import foodSteak from "@/assets/food-steak.jpg";
 
+import videoBurger from "@/assets/video-burger.mp4.asset.json";
+import videoPizza from "@/assets/video-pizza.mp4.asset.json";
+import videoRamen from "@/assets/video-ramen.mp4.asset.json";
+import videoSushi from "@/assets/video-sushi.mp4.asset.json";
+import videoDoener from "@/assets/video-doener.mp4.asset.json";
+import videoDessert from "@/assets/video-dessert.mp4.asset.json";
+import videoSteak from "@/assets/video-steak.mp4.asset.json";
+
 export interface FoodPost {
   id: string;
   image: string;
+  video?: string;
   restaurant: string;
   dish: string;
   description: string;
