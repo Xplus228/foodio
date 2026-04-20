@@ -51,22 +51,45 @@ const FoodCard = ({ post, onSave, isSaved, isLiked, onLike, onAddToCart, onComme
 
   return (
     <div className="relative w-full h-full snap-start snap-always flex-shrink-0">
-      {/* Food Image */}
+      {/* Food Image or Video */}
       <div className="absolute inset-0">
-        {!imgLoaded && (
+        {!imgLoaded && !post.video && (
           <div className="absolute inset-0 bg-muted animate-shimmer"
             style={{ backgroundImage: "linear-gradient(90deg, transparent, hsl(var(--primary) / 0.05), transparent)", backgroundSize: "200% 100%" }}
           />
         )}
-        <img
-          src={post.image}
-          alt={post.dish}
-          className={`w-full h-full object-cover transition-opacity duration-500 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
-          onLoad={() => setImgLoaded(true)}
-          loading="lazy"
-        />
+        {post.video ? (
+          <video
+            ref={videoRef}
+            src={post.video}
+            poster={post.image}
+            className="w-full h-full object-cover"
+            loop
+            muted={muted}
+            playsInline
+            preload="metadata"
+          />
+        ) : (
+          <img
+            src={post.image}
+            alt={post.dish}
+            className={`w-full h-full object-cover transition-opacity duration-500 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
+            onLoad={() => setImgLoaded(true)}
+            loading="lazy"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/20 to-transparent" />
       </div>
+
+      {/* Mute toggle for videos */}
+      {post.video && (
+        <button
+          onClick={() => setMuted(!muted)}
+          className="absolute top-20 right-4 z-20 w-10 h-10 rounded-full glass flex items-center justify-center transition-all active:scale-90"
+        >
+          {muted ? <VolumeX className="w-5 h-5 text-primary-foreground" /> : <Volume2 className="w-5 h-5 text-primary-foreground" />}
+        </button>
+      )}
 
       {/* Limited badge */}
       {post.isLimited && (
