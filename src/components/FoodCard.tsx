@@ -10,6 +10,7 @@ interface FoodCardProps {
   onLike: (id: string) => void;
   onAddToCart: (post: FoodPost) => void;
   onComments: (post: FoodPost) => void;
+  isVisible?: boolean;
 }
 
 const FoodCard = ({ post, onSave, isSaved, isLiked, onLike, onAddToCart, onComments }: FoodCardProps) => {
